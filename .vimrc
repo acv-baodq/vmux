@@ -11,7 +11,5 @@ set number
 set ignorecase
 set incsearch
 set wildmenu
-set wildmode=longest,list,full
 
 colorscheme default
-set background=dark
