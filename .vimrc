@@ -1,4 +1,19 @@
 set nocompatible
+filetype off                  " required
+
+" Plugins
+set rtp+=~/.fzf
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+  Plugin 'tpope/vim-fugitive'
+  Plugin 'tpope/vim-surround'
+  Plugin 'bling/vim-airline'
+  Plugin 'vim-airline/vim-airline-themes'
+  Plugin 'Yggdroot/indentLine'
+  Plugin 'dracula/vim'
+call vundle#end()
+
+"Basic config
 filetype plugin indent on  
 syntax on                 
 set autoindent 
@@ -11,5 +26,14 @@ set number
 set ignorecase
 set incsearch
 set wildmenu
+set path+=**
 
-colorscheme default
+" THEME
+let g:airline_theme='dracula'
+let g:dracula_italic = 0
+colorscheme dracula
+highlight Normal ctermbg=None
+
+
+" binding key
+nmap <C-P> :FZF ~/Documents/atmarkcafe/proj_atmarkdmp<CR>
