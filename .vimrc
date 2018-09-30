@@ -7,6 +7,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
   Plugin 'tpope/vim-fugitive'
   Plugin 'tpope/vim-surround'
+  Plugin 'tpope/vim-rails'
   Plugin 'bling/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
   Plugin 'Yggdroot/indentLine'
@@ -16,6 +17,7 @@ call vundle#end()
 
 "Basic config
 filetype plugin indent on  
+set noswapfile
 syntax on                 
 set autoindent 
 set expandtab    
@@ -36,6 +38,7 @@ let g:dracula_italic = 0
 colorscheme dracula
 highlight Normal ctermbg=None
 let g:airline_powerline_fonts = 1
+let g:tmuxline_powerline_separators = 0
 
 
 " binding key
