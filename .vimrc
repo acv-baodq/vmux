@@ -1,21 +1,23 @@
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+  Plugin 'tpope/vim-fugitive'
+  Plugin 'tpope/vim-surround'
+  Plugin 'tpope/vim-rails'
+  Plugin 'dracula/vim'
   Plugin 'bling/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
-  Plugin 'morhetz/gruvbox'
-  Plugin 'junegunn/goyo.vim'
-  Plugin 'jonathanfilip/vim-lucius'
+  Plugin 'Yggdroot/indentLine'
 call vundle#end()
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
 " Show just the filename
 let g:airline#extensions#tabline#fnamemod = ':t'
 " Theme airline
-let g:airline_theme='lucius'
+let g:airline_theme='dracula'
 " Theme
-color lucius
-set background=dark
-
+let g:dracula_italic = 0
+colorscheme dracula
+highlight Normal ctermbg=None
 " Basic config
 set nocompatible
 filetype off
@@ -23,17 +25,13 @@ filetype plugin indent on
 set noswapfile
 syntax on                 
 set hidden
-set lazyredraw
-set nocursorcolumn
-set cursorline
-set showcmd
+"indent
 set autoindent 
 set expandtab    
 set softtabstop=2
 set shiftwidth =2
-set smartindent
-set ruler
 set laststatus=2
+"search
 set ignorecase
 set incsearch
 set wildmenu
@@ -67,21 +65,3 @@ nmap <Leader>p :bp<CR>
 nmap <Leader>d :bd<CR>
 nmap <Leader>o :find<Space>
 nmap <Leader>e :Explore<CR>
-nmap <Leader>a :Goyo<CR>
-map <Leader>g :let &background = ( &background == "dark"? "light" : "dark" )<CR>
-
-function! s:goyo_enter()
-  silent !tmux set status off
-  silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-  set noshowmode
-  set scrolloff=999
-endfunction
-
-function! s:goyo_leave()
-  silent !tmux set status on
-  silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-  set showcmd
-endfunction
-
-autocmd! User GoyoEnter nested call <SID>goyo_enter()
-autocmd! User GoyoLeave nested call <SID>goyo_leave()
