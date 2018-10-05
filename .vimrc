@@ -2,6 +2,11 @@ set nocompatible
 filetype off
 
 " Plugin
+set rtp+=~/.fzf
+nmap <C-P> :FZF .<CR>
+let g:fzf_action = {
+  \ 'ctrl-c': 'split',
+  \ 'ctrl-v': 'vsplit' }
 "set rtp+=~/.vim/bundle/Vundle.vim
 "call vundle#begin()
 "  Plugin 'tpope/vim-fugitive'
@@ -21,7 +26,7 @@ filetype off
 
 " Theme
 "let g:dracula_italic = 0
-"colorscheme lucius
+colorscheme peachpuff
 "set background=light
 
 " Basic config
@@ -45,9 +50,10 @@ set wildmenu
 
 " Prevent lagging
 set noshowmatch
-set scrolljump=5
+set scrolljump=10
 set lazyredraw
 set nocursorcolumn
+set path+=**
 hi NonText cterm=NONE ctermfg=NONE
 
 " Center thing
@@ -60,6 +66,7 @@ nmap * *zz
 nmap H Hzz
 nmap M Mzz
 nmap L Lzz
+nmap <C-]> <C-]>zz
 function! CenterSearch()
   let cmdtype = getcmdtype()
   if cmdtype == '/' || cmdtype == '?'
@@ -78,5 +85,5 @@ nmap <Leader>l :bufdo e<CR>
 nmap <Leader>n :bn<CR>
 nmap <Leader>p :bp<CR>
 nmap <Leader>d :bd<CR>
-nmap <Leader>o :find **/*
+nmap <Leader>o :find<Space> 
 nmap <Leader>e :Explore<CR>
