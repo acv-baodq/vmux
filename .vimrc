@@ -1,34 +1,6 @@
 set nocompatible
 filetype off
 
-" Plugin
-set rtp+=~/.fzf
-nmap <C-P> :FZF .<CR>
-let g:fzf_action = {
-  \ 'ctrl-c': 'split',
-  \ 'ctrl-v': 'vsplit' }
-"set rtp+=~/.vim/bundle/Vundle.vim
-"call vundle#begin()
-"  Plugin 'tpope/vim-fugitive'
-"  Plugin 'tpope/vim-surround'
-"  Plugin 'tpope/vim-rails'
-"  Plugin 'jonathanfilip/vim-lucius'
-"  Plugin 'bling/vim-airline'
-"  Plugin 'vim-airline/vim-airline-themes'
-"  Plugin 'Yggdroot/indentLine'
-"call vundle#end()
-" Enable the list of buffers
-"let g:airline#extensions#tabline#enabled = 1
-" Show just the filename
-"let g:airline#extensions#tabline#fnamemod = ':t'
-" Theme airline
-"let g:airline_theme='simple'
-
-" Theme
-"let g:dracula_italic = 0
-colorscheme peachpuff
-"set background=light
-
 " Basic config
 filetype plugin indent on  
 set noswapfile
@@ -47,6 +19,8 @@ set laststatus=2
 set ignorecase
 set incsearch
 set wildmenu
+set wildmode=list:full
+set wildignore+=tmp/**
 
 " Prevent lagging
 set noshowmatch
@@ -54,7 +28,6 @@ set scrolljump=10
 set lazyredraw
 set nocursorcolumn
 set path+=**
-hi NonText cterm=NONE ctermfg=NONE
 
 " Center thing
 nmap G Gzz
@@ -87,3 +60,18 @@ nmap <Leader>p :bp<CR>
 nmap <Leader>d :bd<CR>
 nmap <Leader>o :find<Space> 
 nmap <Leader>e :Explore<CR>
+nmap <Leader>cn :e ~/Dropbox/notes/coding-notes.txt<CR>
+
+
+" RENAME CURRENT FILE (thanks Gary Bernhardt)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+map <F2> :call RenameFile()<cr>
