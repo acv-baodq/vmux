@@ -10,6 +10,7 @@ syntax on
 set hidden
 set scrolloff=8
 set laststatus=2
+set nowrap
 " Center thing
 nmap G Gzz
 nmap { {zz
@@ -50,7 +51,11 @@ nmap <Leader>ls :ls<CR>:b<Space>
 nmap <Leader>l :bufdo e<CR>
 nmap <Leader>bn :bn<CR>
 nmap <Leader>bp :bp<CR>
+nmap <Tab> :bn<CR>
+nmap <bs> :bp<CR>
 nmap <Leader>bd :bd<CR>
 nmap <Leader>o :find<Space>
 nmap <Leader>e :Explore<CR>
 nmap <Leader><Leader> :nohlsearch<CR>
+
+hi Normal ctermbg=NONE guibg=NONE
