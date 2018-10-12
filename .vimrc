@@ -1,9 +1,7 @@
-colorscheme gruvbox
-set background=dark
 "" Basic config
-set ttm=100 " Don't wait when doing <Esc>O, ttimeoutlen
 set nocompatible
-filetype off
+filetype plugin indent on
+set ttm=100 " Don't wait when doing <Esc>O, ttimeoutlen
 filetype plugin indent on  
 set noswapfile
 syntax on
@@ -11,17 +9,10 @@ set hidden
 set scrolloff=8
 set laststatus=2
 set nowrap
+set lazyredraw
+color lucius
+set background=light
 " Center thing
-nmap G Gzz
-nmap { {zz
-nmap } }zz
-nmap n nzz
-nmap N Nzz
-nmap * *zz
-nmap H Hzz
-nmap M Mzz
-nmap L Lzz
-nmap <C-]> <C-]>zz
 function! CenterSearch()
   let cmdtype = getcmdtype()
   if cmdtype == '/' || cmdtype == '?'
@@ -30,6 +21,15 @@ function! CenterSearch()
   return "\<enter>"
 endfunction
 cnoremap <silent> <expr> <enter> CenterSearch()
+" leave insert mode quickly
+if ! has('gui_running')
+  set ttimeoutlen=10
+  augroup FastEscape
+    autocmd!
+    au InsertEnter * set timeoutlen=0
+    au InsertLeave * set timeoutlen=1000
+  augroup END
+endif
 "" Indent
 set softtabstop=2
 set shiftwidth =2
@@ -40,22 +40,28 @@ set smarttab
 set path+=**
 set ignorecase
 set incsearch
-set hlsearch
+"set hlsearch
 set wildmenu
 set wildmode=list:full
 set wildignore+=tmp/**
 "" Binding Leader
 let mapleader = " "
-nmap <Leader>s :w<CR>
-nmap <Leader>ls :ls<CR>:b<Space>
-nmap <Leader>l :bufdo e<CR>
-nmap <Leader>bn :bn<CR>
-nmap <Leader>bp :bp<CR>
+imap jk <ESC>
+nmap <Leader>b :ls<CR>:b<Space>
+"nmap <Leader>l :bufdo e<CR>
+"nmap <Leader>bn :bn<CR>
+"nmap <Leader>bp :bp<CR>
 nmap <Tab> :bn<CR>
 nmap <bs> :bp<CR>
 nmap <Leader>bd :bd<CR>
 nmap <Leader>o :find<Space>
 nmap <Leader>e :Explore<CR>
+nmap <Leader>s :w<CR>
 nmap <Leader><Leader> :nohlsearch<CR>
+nmap <Leader>st :e ~/.vimrc<CR>
+nmap <Leader>rl :so ~/.vimrc<CR>
+" Plugin
+"set rtp+=~/.fzf	
+"let g:fuf_file_exclude = '\v\~$|\.o$|\.exe$|\.bak$|\.swp$|\.class|tmp$'
+"nmap <Leader>p :FZF .<CR>
 
-hi Normal ctermbg=NONE guibg=NONE
